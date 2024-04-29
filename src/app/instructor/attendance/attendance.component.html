@@ -1,0 +1,153 @@
+<app-instructor-header></app-instructor-header>
+<app-instructor-sidebar></app-instructor-sidebar>
+
+<div class="main-container">
+    <div class="pd-ltr-20 xs-pd-20-10">
+        <div class="min-height-200px">
+            <div class="page-header">
+                <div class="row">
+                    <div class="col-md-6 col-sm-12">
+                        <div class="title">
+                            <h4>Attendance List</h4>
+                        </div>
+                        <nav aria-label="breadcrumb" role="navigation">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">Attendance</li>
+                            </ol>
+                        </nav>
+                    </div>
+                   
+                </div>
+            </div>
+            <!-- Simple Datatable start -->
+            <div class="card-box mb-30">
+                <div class="pd-20">
+                    <!-- <button  mat-raised-button color="primary" >Add Student</button> -->
+                    
+                    <mat-form-field>
+                        <mat-label>Choose a date</mat-label>
+                        <input matInput [matDatepicker]="picker">
+                        <mat-hint>MM/DD/YYYY</mat-hint>
+                        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                        <mat-datepicker #picker></mat-datepicker>
+                    </mat-form-field>
+                </div>
+                <div class="pb-20">
+                    <table class="data-table table stripe hover nowrap">
+                        <thead>
+                            <tr>
+                                <th class="table-plus datatable-nosort">Student</th>
+                                <th>Status</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let n of _instructorService.userInSection">
+                                <td class="table-plus">{{n.firstname}}</td>
+                                <td>
+
+                                </td>
+                              
+                                <td>
+                                    <div class="dropdown">
+                                        <a class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle" href="#" role="button" data-toggle="dropdown">
+                                            <i class="dw dw-more"></i>
+                                        </a>
+                                        <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
+                                            
+                                            <button class="dropdown-item" ><i class="dw dw-edit2"></i> Edit</button>
+                                            <button class="dropdown-item"  ><i class="dw dw-delete-3"></i> Delete</button>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        
+                        </tbody>
+                    </table>
+
+                    
+                </div>
+
+
+
+
+                
+                <!-- <div class="pb-20">
+                    <table class="data-table table stripe hover nowrap">
+                        <thead>
+                            <tr>
+                                <th class="table-plus datatable-nosort">Student</th>
+                                <th>Section</th>
+                                <th *ngFor="let date of datesForThisWeek">{{date.toLocaleDateString()}}</th>
+                                
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let a of _instructorService.attendance">
+                                <td class="table-plus">{{a.firstname}} <span>{{a.lastname}}</span></td>
+                                <td>{{a.sectionname}}</td>
+                                <td *ngFor="let date of datesForThisWeek">
+                                    <form [formGroup]="checkboxForm">
+                                        <p><mat-checkbox formControlName="status">
+                                             <input
+                                    type="checkbox"
+                                    [id]="'checkbox_' + date.getTime()"
+                                    [checked]="isPresent(status)"
+                                  />
+                                        </mat-checkbox></p>
+                                    </form>
+                                   
+                                  </td>
+                               
+                                <td>
+                                    <div class="dropdown">
+                                        <a class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle" href="#" role="button" data-toggle="dropdown">
+                                            <i class="dw dw-more"></i>
+                                        </a>
+                                        <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
+                                            
+                                            <button class="dropdown-item" ><i class="dw dw-edit2"></i> Edit</button>
+                                            <button class="dropdown-item" ><i class="dw dw-delete-3"></i> Delete</button>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        
+                        </tbody>
+                    </table>
+
+                    
+                </div> -->
+                
+            </div>
+            <!-- Simple Datatable End -->
+         
+            <!-- Default Basic Forms Start -->
+          
+      
+            
+            <!-- Default Basic Forms End -->
+        </div>
+        <div class="footer-wrap pd-20 mb-20 card-box">
+            DeskApp - Bootstrap 4 Admin Template By <a href="https://github.com/dropways" target="_blank">Ankit Hingarajiya</a>
+        </div>
+    </div>
+</div>
+
+
+
+<!-- <div class="example-container">
+    <mat-form-field style="width: 90%;">
+    <mat-label class="col-form-label">Select Section</mat-label>
+   <select matNativeControl required formControlName="sectionId">
+       <option *ngFor="let n of _instructorService.sectionn" value={{n.sectionid}}>{{n.sectionname}}</option>
+     </select>
+     <mat-error *ngIf="CreateNotificationForm.controls['sectionId'].hasError('required')">Section Id is required</mat-error>
+    </mat-form-field>
+</div> -->
+
+<!-- <select id="statusDropdown" [(ngModel)]="selectedStatus">
+    <option *ngFor="let option of statusOptions" [value]="option">{{ option }}</option>
+</select> -->

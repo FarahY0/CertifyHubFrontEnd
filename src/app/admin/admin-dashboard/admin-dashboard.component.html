@@ -1,0 +1,129 @@
+<app-admin-header></app-admin-header>
+<app-admin-sidebar></app-admin-sidebar>
+
+
+<div class="main-container">
+    <div class="xs-pd-20-10 pd-ltr-20">
+        <div class="page-header">
+            <div class="row">
+                <div class="col-md-6 col-sm-12">
+                    <div class="title">
+                        <h4 >Dashboard</h4>
+                    </div>
+                    <nav aria-label="breadcrumb" role="navigation">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                            <li class="breadcrumb-item active" style="color: #1E88E5;">Dashboard</li>
+                        </ol>
+                    </nav>
+                </div>
+                <div class="col-md-6 col-sm-12 text-right">
+                  
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xl-3 mb-30">
+                <div class="card-box height-100-p widget-style1">
+                    <div class="d-flex flex-wrap align-items-center">
+                        <div class="progress-data">
+                            <i style="font-size: 40px !important; transform: scale(1.5) !important; color: #797EF6 !important;"
+                                class="icon-copy fi-torsos-female-male"></i>
+                        </div>
+                        <div class="widget-data">
+                            <div class="h4 mb-0" style="color: #455a64 !important;">{{ _adminService.instructorCount }}
+                            </div>
+                            <div class="weight-600 font-14">Trainers</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-3 mb-30">
+                <div class="card-box height-100-p widget-style1">
+                    <div class="d-flex flex-wrap align-items-center">
+                        <div class="progress-data">
+
+                            <i class="icon-copy fi-torsos-male-female"
+                                style="font-size: 40px !important; transform: scale(1.5) !important; color: #1AA7EC !important;"></i>
+                        </div>
+                        <div class="widget-data">
+                            <div class="h4 mb-0" style="color: #455a64 !important;">
+                                {{ _adminService.studentCount }}</div>
+                            <div class="weight-600 font-14">Students</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+         
+        </div>
+
+        <div id="myChartContainer">
+            <canvas baseChart [data]="pieChartData" [type]="barChartType" >
+
+            </canvas>
+        </div>
+
+        <div class="card-box mb-30">
+          
+            <div class="pb-20">
+                <mat-form-field style="width: 100% !important;">
+                    <mat-label>
+Filter
+                    </mat-label>
+                    <input matInput placeholder="Search ..." (keyup)="Filterchange($event)">
+                </mat-form-field>
+                <table mat-table matSort [dataSource]="dataSource" class="mat-elevation-z8">
+                    <!-- Weight Column -->
+                    <ng-container matColumnDef="firstname">
+                        <th mat-header-cell mat-sort-header *matHeaderCellDef> First name </th>
+                        <td mat-cell *matCellDef="let element"> {{element.firstname}} </td>
+                    </ng-container>
+
+                    <!-- Symbol Column -->
+                    <ng-container matColumnDef="lastname">
+                        <th mat-header-cell mat-sort-header *matHeaderCellDef> Last name </th>
+                        <td mat-cell *matCellDef="let element"> {{element.lastname}} </td>
+                    </ng-container>
+                  <!-- Symbol Column -->
+                  <ng-container matColumnDef="address">
+                    <th mat-header-cell mat-sort-header *matHeaderCellDef> Address </th>
+                    <td mat-cell *matCellDef="let element"> {{element.address}} </td>
+                </ng-container>
+              <!-- Symbol Column -->
+              <ng-container matColumnDef="phonenumber">
+                <th mat-header-cell mat-sort-header *matHeaderCellDef> Phone </th>
+                <td mat-cell *matCellDef="let element"> {{element.phonenumber}} </td>
+            </ng-container>
+                    <!-- Position Column -->
+                    <ng-container matColumnDef="coursename">
+                        <th mat-header-cell mat-sort-header *matHeaderCellDef> Course </th>
+                        <td mat-cell *matCellDef="let element"> {{element.coursename}} </td>
+                    </ng-container>
+
+                    <!-- Name Column -->
+                    <ng-container matColumnDef="sectionname">
+                        <th mat-header-cell mat-sort-header *matHeaderCellDef> Section </th>
+                        <td mat-cell *matCellDef="let element"> {{element.sectionname}} </td>
+                    </ng-container>
+
+
+                    <!-- Symbol Column -->
+                    <ng-container matColumnDef="registrationdate">
+                        <th mat-header-cell mat-sort-header *matHeaderCellDef> Registeration Date </th>
+                        <td mat-cell *matCellDef="let element"> {{element.registrationdate | date: 'yyyy-MM-dd'}} </td>
+                    </ng-container>
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                </table>
+                <mat-paginator [pageSizeOptions]="[5,10,20]" showFirstLastButton></mat-paginator>
+          
+            </div>
+        </div>
+
+
+        <div class="footer-wrap pd-20 mb-20 card-box">
+            DeskApp - Bootstrap 4 Admin Template By <a href="https://github.com/dropways" target="_blank">Ankit
+                Hingarajiya</a>
+        </div>
+    </div>
+</div>

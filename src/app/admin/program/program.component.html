@@ -1,0 +1,183 @@
+<app-admin-header></app-admin-header>
+<app-admin-sidebar></app-admin-sidebar>
+<div class="main-container">
+    <div class="pd-ltr-20">
+        
+        <div class="row">
+            
+           
+           
+            
+        </div>
+        <div class="row">
+           
+            <button    (click)=opencreatedilog() mat-raised-button style="margin-bottom:10px;margin-left: 20px;background-color: #1E88E5;  color: white;"> 
+              
+                <i class="material-icons">add_circle</i> &nbsp; Create Program</button>
+
+        </div>
+        <div class="card-box mb-30">
+            <h2 class="h4 pd-20" style="color: #1E88E5;">Program Details </h2>
+            <table class="data-table table nowrap" class="program-table" >
+                <table class="program-table" >
+                    <tr>
+                      <th>Track Name</th>
+                      <th>Description</th>
+                      <th>Program Period(months)</th>
+                      <th>Actions</th>
+                    </tr>
+                    <tr *ngFor="let pr of _adminService.programs">
+                      <td>{{ pr.trackname }}</td>
+                      <td>{{ pr.description }}</td>
+                      <td>{{ pr.programperiod }}</td>
+                      <td>
+                        <div class="dropdown">
+                            <a class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle" href="#" role="button" data-toggle="dropdown">
+                                <i class="dw dw-more" style="color: #1E88E5;"></i>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
+                                
+                                <button class="dropdown-item" (click)="openupdatedilog(pr)"><i class="dw dw-edit2"></i> Edit</button>
+                                <button class="dropdown-item" (click)="openconfirmdilog(pr.programid)" ><i class="dw dw-delete-3"></i> Delete</button>
+                            </div>
+                        </div>
+
+                    </td>   
+                  </tr>
+                  </table>
+               
+                    
+                      
+
+
+
+
+                    
+<br>
+
+<br>
+
+    <ng-template  #createdilog>
+  <form [formGroup]="createprogramform"   style="margin: 20px;">
+    <div class="example-container">
+      <mat-form-field>
+        <mat-label>Enter Track name</mat-label>
+        <input type="text" matInput placeholder="trackname" formControlName="trackname" required>
+        <mat-error *ngIf="createprogramform.controls['trackname'].hasError('required')">Track name is required.</mat-error>
+      </mat-form-field>
+    </div> 
+  
+
+
+
+
+
+    <!-- <div class="example-container">
+      <mat-form-field>
+        <mat-label>Upload File</mat-label>
+        <mat-icon matPrefix>attach_file</mat-icon>
+        <input matInput type="file" (change)="UploadImage($event)" id="fileInput" style="display: none">
+        <label for="fileInput" class="custom-file-label">Choose file</label>
+      </mat-form-field>
+    </div> -->
+    
+  
+    <div class="example-container">
+      <mat-form-field>
+        <mat-label>Enter Description</mat-label>
+        <input type="text" matInput placeholder="description" formControlName="description">
+      </mat-form-field>
+    </div>
+  
+    <div class="example-container">
+      <mat-form-field>
+        <mat-label>Enter Program Period</mat-label>
+        <input type="text" matInput placeholder="period" formControlName="programperiod">
+      </mat-form-field>
+    </div>
+
+    <div  class="example-container">
+        <input class="form-control" type="file" id="formFile" formControlName="imagepath"  (change)="UploadProgramImage($event)" style="width: 210px;margin-left:60px;">
+      </div>
+  
+    <button  (click)="CreateProgram()"  mat-raised-button style="background-color: #1A237E; color: white;margin-top: 10px;"> Create </button>
+
+  </form>
+</ng-template> 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<ng-template #confirmDeleteProgram>
+    <h1 mat-dialog-title style="color:#1E88E5;">Delete Program</h1>
+    <div mat-dialog-content>
+      Would you like to delete this program?
+    </div>
+    <div mat-dialog-actions class="justify-content-center" >
+      <button mat-button mat-dialog-close="no" cdkFocusInitial>No</button>
+      <button mat-button mat-dialog-close="yes"  style="background-color: #1E88E5;color: white;" >Yes</button>
+    </div>
+  </ng-template>
+
+
+
+  <ng-template #updatedilog>
+    <form [formGroup]="Updateprogramform" class="update-form">
+      <div class="example-container">
+        <mat-form-field>
+          <mat-label>Enter Track name</mat-label>
+          <input type="text" matInput placeholder="Track name" formControlName="trackname" required>
+          <mat-error *ngIf="Updateprogramform.controls['trackname'].hasError('required')">Track name is required.</mat-error>
+        </mat-form-field>
+      </div>
+  
+      <!-- <div class="example-container">
+        <mat-form-field>
+          <mat-label>Enter Image Path</mat-label>
+          <input type="text" matInput placeholder="Image path" formControlName="imagepath" required>
+          <mat-error *ngIf="Updateprogramform.controls['imagepath'].hasError('required')">Image path is required.</mat-error>
+        </mat-form-field>
+      </div> -->
+
+      <div class="example-container">
+        <mat-form-field>
+          <mat-label>Enter Description</mat-label>
+          <input type="text" matInput placeholder="Description" formControlName="description">
+        </mat-form-field>
+      </div>
+  
+      <div class="example-container">
+        <mat-form-field>
+          <mat-label>Enter Program Period</mat-label>
+          <input type="text" matInput placeholder="Program period" formControlName="programperiod">
+        </mat-form-field>
+      </div>
+
+      <div  class="example-container">
+        <input class="form-control" type="file" id="formFile" formControlName="imagepath"  (change)="UploadProgramImage($event)" style="width: 210px;margin-left:80px;">
+      </div>
+
+<section>
+<div class="example-button-row"  >
+<button style="margin-left: 0px;margin-top: 15px; background-color: #1565C0;width: 160px; color: white;" mat-stroked-button  mat-dialog-close  type="submit" value="Update" (click)="Updateprogram()">Update Program</button>
+</div>
+</section>
+    </form>
+  </ng-template>

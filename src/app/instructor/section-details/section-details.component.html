@@ -1,0 +1,115 @@
+<app-instructor-header></app-instructor-header>
+<app-instructor-sidebar></app-instructor-sidebar>
+<div class="main-container">
+	<div class="pd-ltr-20 xs-pd-20-10">
+		<div class="min-height-200px">
+			<div class="page-header">
+				<div class="row">
+					<div class="col-md-12 col-sm-12">
+						<div class="title">
+
+						</div>
+						<nav aria-label="breadcrumb" role="navigation">
+							<ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">Attendance</li>
+                            </ol>
+						</nav>
+					</div>
+				</div>
+			</div>
+
+
+			<form>
+				<table class="data-table table stripe hover nowrap">
+					<thead>
+						<tr>
+							<th class="table-plus datatable-nosort"> Name</th>
+							<th>Take Attendance</th>
+
+						</tr>
+					</thead>
+					<tbody>
+						<tr *ngFor="let s of _instructorService.userInSection">
+							<td class="table-plus">{{s.firstname}} <span>{{s.lastname}}</span></td>
+							<td>
+								<input type="checkbox">
+							</td>
+						</tr>
+					</tbody>
+				</table>
+				<div class="pd-20">
+					<button type="submit" mat-stroked-button color="primary" type="submit" value="Create"
+						style="margin-left: 10px;margin-bottom:10px;">SAVE</button>
+				</div>
+
+			</form>
+		</div>
+		<div>
+
+		</div>
+
+
+
+
+
+	</div>
+</div>
+
+<ng-template #UpdateDialog >
+
+	<div>
+		<form [formGroup]="UpdateAttendanceForm" style="background-color: #202342; color: antiquewhite ;
+		text-align:center;
+	  
+	  background-size: cover;
+	  background-position: center;
+	
+	  height: 81.3vh;
+	  margin: none;
+		">
+
+			<mat-form-field>
+                <mat-label>Status</mat-label>
+                <select matNativeControl required formControlName="status"> 
+                  <option >Presant</option>
+                  <option >Absent</option>
+                </select>
+                <mat-error *ngIf="UpdateAttendanceForm.controls['status'].hasError('required')">status type is required</mat-error>
+			</mat-form-field>
+				<mat-form-field>
+					<div class="example-container">
+					<mat-label> User Id</mat-label>
+					<select matNativeControl required formControlName="userid"
+						*ngFor="let s of _instructorService.userInSection">
+						<option value={{s.userid}}>{{s.userid}}</option>
+					</select>
+					<mat-error *ngIf="UpdateAttendanceForm.controls['userid'].hasError('required')">User Id
+						required</mat-error>
+					</div>
+				</mat-form-field>
+				
+
+				<mat-form-field style="width: 90%;">
+					<div class="example-container">
+						<mat-label for="example-datetime-local-input" class="col-form-label">date of
+							attendance</mat-label>
+						<div>
+							<input class="form-control datetimepicker" placeholder="Choose Date anf time" type="date"
+								formControlName="dateofattendance">
+							<mat-error
+								*ngIf="UpdateAttendanceForm.controls['dateofattendance'].hasError('required')">date is
+								required</mat-error>
+						</div>
+					</div>
+				</mat-form-field>
+
+
+				<div>
+					<button mat-dialog-close (click)="UpdateAttendance()" type="submit" mat-raised-button
+						class="example-label" style="background-color: aliceblue !important; color:  #202342;"
+						class=".button-container">Update</button>
+				</div>
+		</form>
+	</div>
+</ng-template>

@@ -1,0 +1,237 @@
+<app-instructor-header></app-instructor-header>
+<app-instructor-sidebar></app-instructor-sidebar>
+<div class="main-container">
+  <div class="pd-ltr-20">
+      <div class="row">
+       
+      </div>
+      <button mat-stroked-button   type="submit" value="Create" style="margin-bottom: 10px;color: #1E88E5;" (click)="OpenAssessmentDialog()">Create New Assessment</button>
+      <button mat-stroked-button  style="margin-bottom: 10px;margin-left: 10px;color: #1E88E5;"   (click)="goBack()">Back To Sections</button>
+      <div class="row">
+          <div class="col-xl-8 mb-30" *ngFor="let assessment of _instructorService.assessments">
+              <div class="card-box height-100-p pd-20" style="box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
+                  <h2 class="h4 mb-20" style="color: #1E88E5;">{{assessment.title}}</h2>
+                  <p><strong>Description:</strong> {{assessment.description}}</p>
+                  <p><strong>Start Date and Time:</strong> From {{ assessment.startdate | date:'longDate' }} _ {{ assessment.starttime | date:'shortTime' }}</p>
+                  <p><strong>End Date and Time:</strong> To {{ assessment.enddate | date:'longDate' }} _ {{ assessment.endtime | date:'shortTime' }}</p>
+                  <p><strong>Score:</strong> {{assessment.assessmentscore}} Marks</p>
+                  <section>
+                      <div class="example-button-row">
+                          <button mat-stroked-button style="color: #1E88E5;"  (click)="OpenUpdateDialog(assessment)">Update Assessment</button>
+                          <button mat-stroked-button style="color:#1E88E5;" (click)="OpenConfirmDialog(assessment.assessmentid)">Delete Assessment</button>
+                          <button mat-stroked-button style="color: #1E88E5;" *ngIf="assessment.assessmenttype === 'Exam'" routerLink="/Instructor/Questions/{{assessment.assessmentid}}">GO TO Questions</button>
+                      </div>
+                  </section>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>
+
+
+
+
+
+<ng-template #ConfirmationDialog>
+    <h1 mat-dialog-title style="color: #1E88E5;">Delete Assessment</h1>
+    <div mat-dialog-content>
+      Would you like to delete the Assessment?
+    </div>
+    <div mat-dialog-actions style="display: flex; justify-content: center;">
+      <button mat-button mat-dialog-close="no" cdkFocusInitial>No</button>
+      <button mat-button mat-dialog-close="yes" style="color: #1E88E5;" >Yes</button>
+    </div>
+    </ng-template>
+
+   
+
+
+    <ng-template #CreateDialog>
+        <form [formGroup]="CreateAssessmentForm">
+            <div class="example-container">
+                <mat-form-field >
+                  <mat-label>Enter Title</mat-label>
+                  <input matInput  placeholder="Title" formControlName="title" required >
+                  <mat-error *ngIf="CreateAssessmentForm.controls['title'].hasError('required')">Title is required</mat-error>
+                </mat-form-field>
+              </div>
+
+              <div class="example-container">
+                <mat-form-field>
+                  <mat-label>Enter Description</mat-label>
+                  <input matInput  placeholder="Description" formControlName="description" required>
+                  <mat-error *ngIf="CreateAssessmentForm.controls['description'].hasError('required')"> Description is required</mat-error>
+                </mat-form-field>
+              </div>
+           
+              <div class="example-container">
+              <mat-form-field>
+                <mat-label>Select Assessment type</mat-label>
+                <select matNativeControl required formControlName="assessmenttype"> 
+                  <option >Assignment</option>
+                  <option >Exam</option>
+                </select>
+                <mat-error *ngIf="CreateAssessmentForm.controls['assessmenttype'].hasError('required')">Assessment type is required</mat-error>
+              </mat-form-field>
+              </div>
+            
+    
+              <div class="example-container">
+              <mat-form-field color="accent">
+                <mat-label>Enter Start Date(MM/DD/YYYY)</mat-label>
+                <input matInput [matDatepicker]="picker1" formControlName="startdate">
+                <mat-datepicker-toggle matIconSuffix [for]="picker1"></mat-datepicker-toggle>
+                <mat-datepicker #picker1 color="primary"></mat-datepicker>
+                <mat-error *ngIf="CreateAssessmentForm.controls['startdate'].hasError('required')">Start date is required</mat-error>
+              </mat-form-field>
+              </div>
+
+              <div class="example-container">
+              <mat-form-field color="accent">
+                <mat-label>Enter End Date(MM/DD/YYYY)</mat-label>
+                <input matInput [matDatepicker]="picker2"  formControlName="enddate">
+                <mat-datepicker-toggle matIconSuffix [for]="picker2"></mat-datepicker-toggle>
+                <mat-datepicker #picker2 color="primary"></mat-datepicker>
+                <mat-error *ngIf="CreateAssessmentForm.controls['enddate'].hasError('required')">End date is required</mat-error>
+              </mat-form-field>
+              </div>
+
+              <div class="example-container">
+                <mat-form-field>
+                  <mat-label>Enter Start Time</mat-label>
+                  <input matInput   type="time" placeholder="Start Time" formControlName="starttime" required>
+                  <mat-error *ngIf="CreateAssessmentForm.controls['starttime'].hasError('required')">Start Time is required</mat-error>
+                </mat-form-field>
+              </div>
+    
+              <div class="example-container">
+                <mat-form-field>
+                  <mat-label>Enter End Time</mat-label>
+                  <input matInput  type="time" placeholder="End Time" formControlName="endtime" required>
+                  <mat-error *ngIf="CreateAssessmentForm.controls['endtime'].hasError('required')">End Time is required</mat-error>
+                </mat-form-field>
+              </div>
+           
+    
+               <div class="example-container">
+                <mat-form-field>
+                  <mat-label>Enter Assessment Score</mat-label>
+                  <input matInput placeholder="Number of sections" formControlName="assessmentscore" required>
+                  <mat-error *ngIf="CreateAssessmentForm.controls['assessmentscore'].hasError('required')">Number of sections is required</mat-error>
+                </mat-form-field>
+              </div>
+
+              <div  class="example-container">
+                <input class="form-control" type="file" id="formFile" formControlName="attachfile" (change)="UploadAssessmentFile($event)" style="width: 425px;margin-left:30px;">
+              </div>
+    <section>
+    <div class="example-button-row" color="primary" >
+    <button style="margin-left: 50px;color: #1E88E5;" mat-stroked-button color="primary" mat-dialog-close  type="submit" value="Create" (click)= CreateAssessment()>Create New Assessment</button>
+    </div>
+    </section>
+        
+    
+        </form>
+    </ng-template>
+    
+
+
+
+
+    <ng-template #UpdateDialog>
+      <form [formGroup]="UpdateAssessmentForm">
+          <div class="example-container">
+              <mat-form-field>
+                <mat-label>Enter Title</mat-label>
+                <input matInput  placeholder="Title" formControlName="title" required>
+                <mat-error *ngIf="UpdateAssessmentForm.controls['title'].hasError('required')">Title is required</mat-error>
+              </mat-form-field>
+            </div>
+
+            <div class="example-container">
+              <mat-form-field>
+                <mat-label>Enter Description</mat-label>
+                <input matInput  placeholder="Description" formControlName="description" required>
+                <mat-error *ngIf="UpdateAssessmentForm.controls['description'].hasError('required')"> Description is required</mat-error>
+              </mat-form-field>
+            </div>
+        
+           
+            <mat-form-field>
+              <mat-label>Select Assessment type</mat-label>
+              <select matNativeControl required formControlName="assessmenttype" > 
+                <option >Assignment</option>
+                <option >Exam</option>
+              </select>
+              <mat-error *ngIf="UpdateAssessmentForm.controls['assessmenttype'].hasError('required')">Assessment type is required</mat-error>
+            </mat-form-field>
+ 
+    
+              <div class="example-container">
+              <mat-form-field color="accent">
+                <mat-label>Enter Start Date(MM/DD/YYYY)</mat-label>
+                <input matInput [matDatepicker]="picker1" formControlName="startdate">
+                <mat-datepicker-toggle matIconSuffix [for]="picker1"></mat-datepicker-toggle>
+                <mat-datepicker #picker1 color="primary"></mat-datepicker>
+                <mat-error *ngIf="UpdateAssessmentForm.controls['startdate'].hasError('required')">Start date is required</mat-error>
+              </mat-form-field>
+              </div>
+
+              <div class="example-container">
+              <mat-form-field color="accent">
+                <mat-label>Enter End Date(MM/DD/YYYY)</mat-label>
+                <input matInput [matDatepicker]="picker2"  formControlName="enddate">
+                <mat-datepicker-toggle matIconSuffix [for]="picker2"></mat-datepicker-toggle>
+                <mat-datepicker #picker2 color="primary"></mat-datepicker>
+                <mat-error *ngIf="UpdateAssessmentForm.controls['enddate'].hasError('required')">End date is required</mat-error>
+              </mat-form-field>
+              </div>
+
+ 
+            <div class="example-container">
+              <mat-form-field>
+                <mat-label>Enter Start Time</mat-label>
+                <input matInput   type="time" placeholder="Start Time" formControlName="starttime" required>
+                <mat-error *ngIf="UpdateAssessmentForm.controls['starttime'].hasError('required')">Start Time is required</mat-error>
+              </mat-form-field>
+            </div>
+
+            
+  
+            <div class="example-container">
+              <mat-form-field>
+                <mat-label>Enter End Time</mat-label>
+                <input matInput  type="time" placeholder="End Time" formControlName="endtime" required>
+                <mat-error *ngIf="UpdateAssessmentForm.controls['endtime'].hasError('required')">End Time is required</mat-error>
+              </mat-form-field>
+            </div>
+         
+            <!--<div class="example-container">
+              
+              <input type="file" (change)="UploadImages($event)">
+            </div>-->
+  
+            <div class="example-container">
+              <mat-form-field>
+                <mat-label>Enter Assessment Score</mat-label>
+                <input matInput placeholder="Number of sections" formControlName="assessmentscore" required>
+                <mat-error *ngIf="UpdateAssessmentForm.controls['assessmentscore'].hasError('required')">Number of sections is required</mat-error>
+              </mat-form-field>
+            </div>
+
+            <div  class="example-container">
+              <input class="form-control" type="file" id="formFile" formControlName="attachfile" (change)="UploadAssessmentFile($event)" style="width: 425px;margin-left:30px;">
+            </div>
+            
+        
+          
+          
+  <section>
+  <div class="example-button-row" color="primary" >
+  <button style="margin-left: 50px;color: #1E88E5;" mat-stroked-button color="primary" mat-dialog-close  type="submit" value="Update" (click)= UpdateAssessment()>Update Assessment</button>
+  </div>
+  </section>
+      
+  
+      </form>
+  </ng-template>

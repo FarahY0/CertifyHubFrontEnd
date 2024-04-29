@@ -1,0 +1,128 @@
+<!-- <app-student-header></app-student-header>
+<app-student-sidebar></app-student-sidebar>
+<div class="main-container">
+  <div class="pd-ltr-20 xs-pd-20-10">
+    <div class="min-height-200px">
+      <div class="page-header">
+        <div class="row">
+          <div class="col-md-12 col-sm-12">
+            <div class="title">
+              <h4>Cards</h4>
+            </div>
+            <nav aria-label="breadcrumb" role="navigation">
+              <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Cards</li>
+              </ol>
+            </nav>
+          </div>
+        </div>
+      </div>
+      <div class="row clearfix" *ngFor="let c of _learnerService.courses">
+        <div class="col-lg-3 col-md-6 col-sm-12 mb-30" >
+          <div class="card card-box">
+            <img class="card-img-top" [src]="c.imagepath" alt="Card image cap">
+            <div class="card-body">
+              <h5 class="card-title weight-500">{{c.coursename}}</h5>
+              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+              <p class="card-text">Start Date: {{c.startdate}}</p>
+              <p class="card-text">End Date: {{c.enddate}}</p>
+             
+              <a href="#" class="btn btn-primary">Go somewhere</a>
+            </div>
+          </div>
+        </div>
+      
+      </div>
+    
+    </div>
+    <div class="footer-wrap pd-20 mb-20 card-box">
+      DeskApp - Bootstrap 4 Admin Template By <a href="https://github.com/dropways" target="_blank">Ankit Hingarajiya</a>
+    </div>
+  </div>
+</div>
+
+<app-student-footer></app-student-footer>
+
+  -->
+  <app-student-header></app-student-header>
+  <app-student-sidebar></app-student-sidebar>
+  <div class="main-container">
+	<div class="pd-ltr-20 xs-pd-20-10">
+		<div class="min-height-200px">
+			<div class="page-header">
+				<div class="row">
+					<div class="col-md-12 col-sm-12">
+						<div class="title">
+							<h4>Cards Hover</h4>
+						</div>
+						<nav aria-label="breadcrumb" role="navigation">
+							<ol class="breadcrumb">
+								<li class="breadcrumb-item"><a href="index.html">Home</a></li>
+								<li class="breadcrumb-item active" aria-current="page">My Courses</li>
+							</ol>
+						</nav>
+					</div>
+				</div>
+			</div>
+			<!-- Fade-in effect -->
+			
+			<div class="row clearfix">
+				<div class="col-lg-3 col-md-6 col-sm-12 mb-30" *ngFor="let c of _learnerService.courses" style="margin-left: 3% !important;">
+        
+          <div class="da-card" style="height: 350px !important; width: 300px !important;" >
+						<div class="da-card-photo">
+							<img src="/assets/Image/c.jpg" alt="">
+							<div class="da-overlay">
+								
+							</div>
+
+						</div>
+            <div class="da-card-content">
+             
+              <div >
+                <div>
+                  <div class="d-flex justify-content-between mb-3">
+ 
+                    <small class="m-0"><i class="fa fa-users text-primary mr-2"></i>25 Students</small>
+                    <small class="m-0"><i class="far fa-clock text-primary mr-2"></i>{{c.timelecture}}</small>
+                    <!-- <p class="m-0"><i class="icon-copy fa fa-hand-o-right" aria-hidden="true"></i> &nbsp; {{c.trackname}}  <i class="icon-copy fa fa-angle-double-right" aria-hidden="true"></i> {{c.coursename}}</p>
+                   -->
+                  
+                  </div>
+                  <a class="h5" routerLink="/learner/CourseDetails/{{c.courseid}}">{{c.trackname}}  <i class="icon-copy fa fa-angle-double-right" aria-hidden="true"></i> {{c.coursename}}</a>
+                  <div class="border-top mt-4 pt-4">
+                     
+                  </div>
+
+                    <div style="display: flex;justify-content: center; align-items: center;height: 100%;">
+                      <a  style="background-color: #3f51b5; color: aliceblue;" mat-raised-button href="https://www.google.com/" target="_blank">Join Meeting </a>
+                    
+                    </div>
+              </div>
+            </div>
+            </div>
+					</div>
+       
+				</div>
+			
+			</div>
+  
+
+		
+
+		</div>
+	
+	</div>
+</div>
+
+
+  <!-- <button mat-button (click)="openDialog()">Launch dialog</button> -->
+
+
+
+
+
+
+
+

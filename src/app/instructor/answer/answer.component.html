@@ -1,0 +1,125 @@
+<app-instructor-header></app-instructor-header>
+<app-instructor-sidebar></app-instructor-sidebar>
+<div class="main-container">
+    <div class="pd-ltr-20">
+        
+        <div class="row">
+            
+           
+           
+            
+        </div>
+        <div class="row">
+           
+           
+        </div>
+        <button mat-stroked-button color="primary"  type="submit" value="Create" style="margin-bottom:10px;color: #1E88E5;" (click)= OpenCreateDialog() >Add New Answer </button>
+        <div >
+       
+        
+        <div class="card-box mb-30" >
+            <h2 class="h4 pd-20" style="color: #1E88E5;">Answers Details</h2>
+            <table class="data-table table nowrap " >
+                <thead style="background-color: #f2f2f2;" >
+                    <tr>
+                        <th>Answer Text</th>
+                        <th>Answer Status</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let a of _instructorService.answer " >
+                        <td>{{a.answertext}}</td>
+                        <td>{{a.iscorrect}}</td>
+                        <td><div class="example-button-row" style="margin-right: 10px;"  >
+                            
+                            <button mat-stroked-button color="primary" style="margin-right: 10px;color: #1E88E5;" (click)= OpenUpdateDialog(a) >Update Answer</button>
+                            <button mat-stroked-button color="primary" style="margin-right: 10px;color: #1E88E5;" (click)= OpenConfirmDialog(a.answerid)  >Delete Answer</button>
+                          <!-- <button mat-stroked-button color="primary"  type="submit"  style="margin-left: 10px;" routerLink="/Instructor/Questions/{{AssessmentId}}">Back To Questions List</button>--> 
+                          </div></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <button mat-stroked-button style="color: #1E88E5;"  (click)="goBack()">Back To Questions List</button>
+    </div>
+    </div>
+</div>
+
+
+<ng-template #ConfirmationDialog>
+    <h1 mat-dialog-title  style="color: #1E88E5;" >Delete Answer</h1>
+    <div mat-dialog-content>
+      Would you like to delete the Answer?
+    </div>
+    <div mat-dialog-actions style="display: flex; justify-content: center;">
+      <button mat-button mat-dialog-close="no" cdkFocusInitial>No</button>
+      <button mat-button mat-dialog-close="yes"  style="color: #1E88E5;"  >Yes</button>
+    </div>
+    </ng-template>
+
+
+
+
+    <ng-template #CreateDialog>
+        <form [formGroup]="CreateAnswerForm">
+            <div class="example-container">
+                <mat-form-field>
+                  <mat-label>Enter Answer Text</mat-label>
+                  <input matInput placeholder="Answer Text" formControlName="answertext" required>
+                  <mat-error *ngIf="CreateAnswerForm.controls['answertext'].hasError('required')">Answer Text is required</mat-error>
+                </mat-form-field>
+              </div>
+             
+              
+              <mat-form-field>
+                <mat-label>Determine if the answer is correct or not</mat-label>
+                <select matNativeControl required formControlName="iscorrect" > 
+                  <option value='Correct' >Correct</option>
+                  <option value='Incorrect'>Incorrect</option>
+                </select>
+                <mat-error *ngIf="CreateAnswerForm.controls['iscorrect'].hasError('iscorrect')">This field is required</mat-error>
+              </mat-form-field>
+              
+    <section>
+    <div class="example-button-row" color="primary" >
+    <button style="margin-left: 10px;" mat-stroked-button  style="color: #1E88E5;"  mat-dialog-close  type="submit" value="Create" (click)= CreateAnswer()>Create Answer</button>
+    </div>
+    </section>
+        
+    
+        </form>
+    </ng-template>
+
+
+
+
+
+    <ng-template #UpdateDialog>
+        <form [formGroup]="UpdateAnswerForm">
+            <div class="example-container">
+                <mat-form-field>
+                  <mat-label>Enter Answer Text</mat-label>
+                  <input matInput placeholder="Answer Text" formControlName="answertext" required>
+                  <mat-error *ngIf="UpdateAnswerForm.controls['answertext'].hasError('required')">Answer Text is required</mat-error>
+                </mat-form-field>
+              </div>
+
+              <mat-form-field>
+                <mat-label>Update if the answer is correct or not</mat-label>
+                <select matNativeControl required formControlName="iscorrect" > 
+                  <option value='Correct' >Correct</option>
+                  <option value='Incorrect'>Incorrect</option>
+                </select>
+                <mat-error *ngIf="UpdateAnswerForm.controls['iscorrect'].hasError('iscorrect')">This field is required</mat-error>
+              </mat-form-field>
+              
+    <section>
+    <div class="example-button-row" style="color: #1E88E5;" >
+    <button style="margin-left: 10px;" mat-stroked-button style="color: #1E88E5;" mat-dialog-close  type="submit" value="Update" (click)= UpdateAnswer()>Update Answer</button>
+    </div>
+    </section>
+        
+    
+        </form>
+    </ng-template>

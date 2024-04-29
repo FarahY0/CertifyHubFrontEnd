@@ -1,0 +1,29 @@
+/* Add these styles to your component's CSS/SCSS file */
+
+form {
+    text-align: center;
+    margin-top: 30px;
+    margin-bottom: 20px;
+  }
+  
+  .example-container {
+    width: 100%; /* Set the width to 100% or adjust as needed */
+    margin-bottom: 20px; /* Add some bottom margin for spacing */
+  }
+  
+  mat-form-field {
+    width: 88%; /* Set the width to 100% or adjust as needed */
+  }
+  
+  .example-button-row {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px; /* Add some top margin for spacing */
+  }
+  
+  .example-button-row button {
+    margin: 0 8px; /* Adjust the margin as needed */
+  }
+  .program-table th {
+    background-color: #f2f2f2;
+  }

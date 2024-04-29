@@ -1,0 +1,123 @@
+<app-instructor-header></app-instructor-header>
+<app-instructor-sidebar></app-instructor-sidebar>
+<div class="main-container">
+    <div class="pd-ltr-20">
+        
+        <div class="row">
+            
+           
+           
+            
+        </div>
+        <div class="row">
+           
+           
+        </div>
+        <button mat-stroked-button color="primary"  type="submit" value="Create" (click)= OpenCreateDialog() style="margin-bottom:10px;color: #1E88E5;" >Add New Question </button>
+        <div>
+       
+        
+        <div class="card-box mb-30" >
+            <h2 class="h4 pd-20" style="color: #1E88E5;">Questions Details</h2>
+            <table class="p data-table table nowrap ">
+                <thead style="background-color: #f2f2f2;">
+                    <tr >
+                        <th>Text</th>
+                        <th>Marks</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody >
+                    <tr  *ngFor="let question of _instructorService.questions ">
+                        <td>{{question.questiontext}}</td>
+                        <td>{{question.marks}}</td>
+                        <td><div class="example-button-row" style="margin-right: 10px;"  >
+                            
+                            <button mat-stroked-button color="primary" style="margin-right: 10px;color: #1E88E5;" (click)= OpenUpdateDialog(question)>Update Question</button>
+                            <button mat-stroked-button color="primary" style="margin-right: 10px;color: #1E88E5;" (click)= OpenConfirmDialog(question.questionid)  >Delete Question</button>
+                            <button mat-stroked-button color="primary" style="margin-right: 10px;color: #1E88E5;" routerLink="/Instructor/Answer/{{question.questionid}}"> Answer</button>
+                          </div></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <button mat-stroked-button style="color: #1E88E5;"  (click)="goBack()">Back To Assessments List</button>
+    </div>
+    </div>
+</div>
+
+
+
+<ng-template #ConfirmationDialog>
+    <h1 mat-dialog-title  style="color: #1E88E5;">Delete Question</h1>
+    <div mat-dialog-content>
+      Would you like to delete the Question?
+    </div>
+    <div mat-dialog-actions style="display: flex; justify-content: center;">
+      <button mat-button mat-dialog-close="no" cdkFocusInitial>No</button>
+      <button mat-button mat-dialog-close="yes"  style="color: #1E88E5;">Yes</button>
+    </div>
+    </ng-template>
+
+    
+
+
+
+
+    <ng-template #UpdateDialog>
+        <form [formGroup]="UpdateQuestionForm">
+            <div class="example-container">
+                <mat-form-field>
+                  <mat-label>Enter Question Text</mat-label>
+                  <input matInput placeholder="Question Text" formControlName="questiontext" required>
+                  <mat-error *ngIf="UpdateQuestionForm.controls['questiontext'].hasError('required')">Question Text is required</mat-error>
+                </mat-form-field>
+              </div>
+    
+              <div class="example-container">
+                <mat-form-field>
+                  <mat-label>Enter Marks</mat-label>
+                  <input matInput placeholder="Marks" formControlName="marks" required>
+                  <mat-error *ngIf="UpdateQuestionForm.controls['marks'].hasError('required')">Marks is required</mat-error>
+                </mat-form-field>
+              </div>
+    
+    <section>
+    <div class="example-button-row" color="primary" >
+    <button style="margin-left: 120px; color: #1E88E5;" mat-stroked-button mat-dialog-close  type="submit" value="Update" (click)= UpdateQuestion()>Update Question</button>
+    </div>
+    </section>
+        
+    
+        </form>
+    </ng-template>
+    
+    
+    <ng-template #CreateDialog>
+      <form [formGroup]="CreateQuestionForm">
+          <div class="example-container">
+              <mat-form-field>
+                <mat-label>Enter Question Text</mat-label>
+                <input matInput placeholder="Question Text" formControlName="questiontext" required>
+                <mat-error *ngIf="CreateQuestionForm.controls['questiontext'].hasError('required')">Question Text is required</mat-error>
+              </mat-form-field>
+            </div>
+  
+            <div class="example-container">
+              <mat-form-field>
+                <mat-label>Enter Marks</mat-label>
+                <input matInput placeholder="Marks" formControlName="marks" required>
+                <mat-error *ngIf="CreateQuestionForm.controls['marks'].hasError('required')">Marks is required</mat-error>
+              </mat-form-field>
+            </div>
+           
+             
+  <section>
+  <div class="example-button-row" color="primary" >
+  <button style="margin-left: 120px;color: #1E88E5;" mat-stroked-button  mat-dialog-close  type="submit" value="Create" (click)= CreateQuestion()>Create Question</button>
+  </div>
+  </section>
+      
+  
+      </form>
+  </ng-template>

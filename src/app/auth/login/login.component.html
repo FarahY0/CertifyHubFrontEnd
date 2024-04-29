@@ -1,0 +1,66 @@
+
+
+  <body>
+  
+  <div class="content">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6 order-md-2" >
+          <!-- <img src="https://res.cloudinary.com/dsmowyioy/image/upload/v1704820156/lms__ndbdaz.jpg" alt="Image" class="img-fluid"> -->
+          <img src="/assets/Image/lms2.jpg" alt="" class="img-fluid" style="width: 1000px !important;">
+        </div>
+        <div class="col-md-6 contents">
+          <div class="row justify-content-center">
+            <div class="col-md-8">
+              <div class="mb-4">
+              <h2 class="sign-in-heading" style=" color:  #1E88E5 !important;">Sign In</h2>
+              
+            </div>
+            <form [formGroup]="loginForm">
+				<!-- <div class="example-container">
+					<mat-form-field>
+					  <mat-label>Username</mat-label>
+					  <input matInput type="text" class="form-control" id="username" required FormControlName="username">
+					 
+						<mat-error *ngIf="loginForm.controls['username'].hasError('required')">Username Is Required</mat-error>
+					  
+					</mat-form-field>
+				  </div> -->
+
+              <div class="form-group first">
+               
+                <input type="text" class="form-control" required formControlName="username">
+				<mat-error *ngIf="loginForm.controls['username'].hasError('required')">Username is Required</mat-error>
+              </div>
+              <div class="form-group last mb-4">
+               
+                <input type="password" class="form-control"   required formControlName="password">
+                
+             <mat-error *ngIf="loginForm.controls['password'].hasError('required')">Password is Required</mat-error>
+              </div>
+              
+              <!-- <div class="d-flex mb-5 align-items-center">
+				<label class="control control--checkbox mb-0"><span class="caption">Remember me</span>
+					<input type="checkbox" checked="checked"/>
+					<div class="control__indicator"></div>
+				  </label>
+                <span class="ml-auto"><a href="#" class="forgot-pass">Forgot Password</a></span> 
+              </div> -->
+<br>
+<br>
+              <button (click)="Login()" style="background-color: #1E88E5;  color: white; text-align: center; align-content: center;"  class="btn text-white btn-block btn-primary">Log In</button>
+
+            
+            </form>
+            </div>
+          </div>
+          
+        </div>
+        
+      </div>
+    </div>
+  </div>
+
+  
+
+  </body>

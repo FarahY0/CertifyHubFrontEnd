@@ -1,0 +1,62 @@
+.custom-dialog-form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding: 20px; /* Add some padding to the form */
+    border-radius: 8px; /* Add border-radius for rounded corners */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Add a subtle box-shadow for depth */
+  }
+  
+  .custom-form-container {
+    width: 100%;
+  }
+  
+  .custom-form-actions {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 16px;
+  }
+  
+  .custom-form-actions button {
+    display: flex;
+    align-items: center;
+    border-radius: 4px; /* Add border-radius to the button */
+  }
+  
+  .custom-form-actions i {
+    margin-right: 8px;
+  }
+  
+  /* Adjust form field styles */
+  mat-form-field {
+    width: 100%;
+  }
+  
+  /* Styling for file input */
+  .custom-form-container label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+  }
+  
+  /* Styling for error messages */
+  mat-error {
+    color: #e74c3c; /* Red color for error messages */
+  }
+  
+  /* Optional: Style the overlay background of the modal */
+  .mat-dialog-container {
+    background: rgba(0, 0, 0, 0.6); /* Semi-transparent dark background */
+  }
+  
+  .material-file-link {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: #333; /* Adjust color as needed */
+  }
+  
+  .material-file-link i {
+    font-size: 24px; /* Adjust the icon size */
+    margin-right: 8px; /* Add some spacing between the icon and text */
+  }

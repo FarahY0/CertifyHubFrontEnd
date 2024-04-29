@@ -1,0 +1,98 @@
+<app-instructor-header></app-instructor-header>
+<app-instructor-sidebar></app-instructor-sidebar>
+  <div class="main-container">
+	<div class="pd-ltr-20 xs-pd-20-10">
+		<div class="min-height-200px">
+			<div class="page-header">
+				<div class="row">
+					<div class="col-md-12 col-sm-12">
+						<div class="title">
+							<h4>Cards Hover</h4>
+						</div>
+						<nav aria-label="breadcrumb" role="navigation">
+							<ol class="breadcrumb">
+								<li class="breadcrumb-item"><a href="index.html">Home</a></li>
+								<li class="breadcrumb-item active" aria-current="page">Sections</li>
+							</ol>
+						</nav>
+					</div>
+				</div>
+			</div>
+			<!-- Fade-in effect -->
+			<!-- <div id="myChartContainer">
+				<canvas baseChart [data]="pieChartData" [type]="barChartType" >
+	
+				</canvas>
+			</div> -->
+			<div class="row clearfix">
+				<div class="col-lg-3 col-md-6 col-sm-12 mb-30" *ngFor="let section of _instructorService.sections " style="margin-left: 3% !important;">
+
+ <div class="da-card" style="height: 350px !important; width: 300px !important;" >
+						<div class="da-card-photo">
+							<img [src]="'https://localhost:7000/Images/' + section.imagepath" alt="">
+							
+							<div class="da-overlay">
+								
+							</div>
+
+						</div>
+
+            <div class="da-card-content">
+             
+              <div >
+                <div>
+                  <div class="d-flex justify-content-between mb-3">
+ 
+                    <small class="m-0"><i class="fa fa-clock text-primary mr-2"></i>{{section.lecturedays}}</small>
+                    <small class="m-0"><i class="far fa-clock text-primary mr-2"></i>{{section.timelecture}}</small>
+                    <!-- <p class="m-0"><i class="icon-copy fa fa-hand-o-right" aria-hidden="true"></i> &nbsp; {{c.trackname}}  <i class="icon-copy fa fa-angle-double-right" aria-hidden="true"></i> {{c.coursename}}</p>
+                   -->
+                  
+                  </div>
+
+                  <a class="h5" > {{section.sectionname}}</a>
+                  <div class="border-top mt-4 pt-4">
+                     
+                  </div>
+<!-- 
+                    <div style="display: flex;justify-content: center; align-items: center;height: 100%;">
+						
+							<button  style="background-color: #1565C0; color: antiquewhite;"  mat-raised-button routerLink="/instructor/SectionDetails/{{section.sectionid}}" >View Section </button> <br> <br>
+						
+				 </div> -->
+					<div style="display: flex;justify-content: center; align-items: center;height: 100%;">
+						<button style="background-color: #1565C0; color: antiquewhite; width: 60% !important;"  mat-raised-button routerLink="/instructor/notification/{{section.sectionid}}">Notification</button>
+                    
+					  </div>
+					  <br>
+					  <div style="display: flex;justify-content: center; align-items: center;height: 100%;">
+						<button style="background-color: #1565C0; color: antiquewhite; width: 60% !important;"  mat-raised-button routerLink="/instructor/Assesments/{{section.sectionid}}">Assessments</button>
+                    
+					  </div>
+					  <br>
+					  <div style="display: flex;justify-content: center; align-items: center;height: 100%;">
+						<button style="background-color: #1565C0; color: antiquewhite; width: 60% !important;"  mat-raised-button routerLink="/instructor/Report/{{section.sectionid}}">Get Report</button>
+                    
+					  </div>
+					  <br>
+					
+					  <div style="display: flex;justify-content: center; align-items: center;height: 100%;">
+						<button style="background-color: #1565C0; color: antiquewhite; width: 60% !important;"  mat-raised-button routerLink="/instructor/Material/{{section.sectionid}}">Materials</button>
+                    
+					  </div>
+              </div>
+            </div>
+            </div>
+					</div>
+       
+				</div>
+			
+			</div>
+  
+
+		
+
+		</div>
+	
+	</div>
+</div>

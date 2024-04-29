@@ -1,0 +1,33 @@
+<app-admin-header></app-admin-header>
+<app-admin-sidebar></app-admin-sidebar>
+<div class="main-container">
+  <div class="pd-ltr-20">
+
+    <button mat-button style="margin-bottom: 10px;color: #1E88E5"  (click)="downloadReport()">
+        <i class="material-icons">download</i> Download 
+      </button>
+    <div class="card-box mb-30">
+      <h2 class="h4 pd-20" style="color: #1E88E5;">Admin Report</h2>
+      <table class="data-table table nowrap program-table">
+        <thead>
+          <tr>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Course Name</th>
+            <th>Section Name</th>
+            <th>Student Grade</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let course of _adminService.courses">
+            <td>{{ course.firstName }}</td>
+            <td>{{ course.lastName }}</td>
+            <td>{{ course.courseName }}</td>
+            <td>{{ course.sectionName }}</td>
+            <td>{{ course.studentGrade }}</td>
+          </tr>
+        </tbody>
+    </table>
+    </div>
+  </div>
+</div>

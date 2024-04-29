@@ -1,0 +1,47 @@
+<app-admin-header></app-admin-header>
+<app-admin-sidebar></app-admin-sidebar>
+<div class="main-container">
+    <div class="pd-ltr-20">
+        
+        <div class="row">
+            
+           
+           
+            
+        </div>
+        <div class="row">
+           
+            
+        </div>
+        <div class="card-box mb-30">
+            <h2 class="h4 pd-20" style="color:  #1E88E5;">Courses Details </h2>
+            <table class="data-table table nowrap" >
+                <thead  class="program-table">
+                    <tr>
+                        <th>Course Name</th>
+                        <th>Track Name</th>
+                        <th>Start Date</th>
+                        <th>End Date</th>
+                       <!-- <th>Image</th>-->
+                        <th>Number Of Sections</th>
+                        <th>Prerequisite</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let course of _adminService.courses ">
+                        <td>{{course.coursename}}</td>
+                        <td>{{course.program.trackname}}</td>
+                        <td>{{ course.startdate | date:'longDate' }}</td>
+                        <td>{{course.enddate| date:'longDate' }}</td>
+                        <!--<td>{{course.imagepath}}</td>-->
+                        <td>{{course.numberofsections}}</td>
+                        <td>{{course.prerequisite}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <button mat-button  style="background-color: #1E88E5;margin-left: 10px; color: White;"  routerLink="/admin/course">
+            <i class="material-icons">arrow_back</i> Back
+          </button>
+    </div>
+</div>

@@ -1,0 +1,211 @@
+<app-instructor-sidebar></app-instructor-sidebar>
+<app-instructor-header></app-instructor-header>
+
+  <style>
+.common-link {
+        color: darkblue;
+        text-decoration: none; /* Optional: Remove underline */
+    }
+    body {
+        margin: 0;
+        padding: 0;
+        font-family: Arial, sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+    }
+
+    .container {
+        text-align: center;
+    }
+
+    table {
+        border-collapse: collapse;
+        margin-top: 20px;
+        width: 80%; 
+    }
+
+    th, td {
+        border: 1px solid #dddddd;
+        text-align: left;
+        padding: 8px;
+    }
+
+    th {
+        background-color: #f2f2f2;
+    }
+</style>
+
+<div class="main-container">
+  <div class="pd-ltr-20">
+    <button (click)="opencreatedilog()" mat-raised-button style="margin-bottom: 10px;background-color: #1A237E; color: white;">
+        <i class="material-icons">add_circle</i> Create Material
+      </button>
+    <div class="card-box mb-30">
+      <table class="data-table table nowrap">
+        <thead>
+          <tr>
+            <th>Material Name</th>
+            <th>Material File</th>
+            <th>Video Url</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let p of _instructorService.material">
+                <td>{{p.materialname}}</td>
+              
+                <!-- <td>
+
+                  <a href="../../../assets/images/{{ p.materialpath }}" download>
+                      {{ p.materialpath.substring(p.materialpath) }}
+                  </a>
+              </td>
+               -->
+            
+            
+            <td>
+                <a href="../../../assets/images/{{ p.materialpath }}" download class="material-file-link common-link">
+                    <i class="material-icons">insert_drive_file</i>
+                    {{ p.materialname }}
+                </a>
+            </td>
+            
+            <td>
+                <div class="video-link">
+                    <a href="{{ p.videourl }}" target="_blank" class="video-icon-link common-link">
+                        <i class="material-icons">play_circle_outline</i>
+                        open video
+                    </a>
+                </div>
+            </td>
+            
+          
+                  <!-- <td>{{p.videourl}}</td> -->
+
+                  
+          
+                <td>
+                  <div class="dropdown">
+                      <a class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle" href="#" class="common-link" role="button" data-toggle="dropdown">
+                          <i class="dw dw-more"></i>
+                      </a>
+                      <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
+                          
+                          <button class="dropdown-item"  (click)=openupdatedilog(p)><i class="dw dw-edit2"></i> Edit</button>
+                          <button class="dropdown-item"  (click)=openconfirmdilog(p.materialid) ><i class="dw dw-delete-3"></i> Delete</button>
+                      </div>
+                  </div>
+              </td>
+
+              </tr>
+        </tbody>
+    </table>
+    </div>
+  </div>
+</div>
+
+     
+
+
+            
+  <ng-template #updatedilog>
+    <form [formGroup]="updatemateralform" class="custom-dialog-form">
+      <div class="custom-form-container">
+        <mat-form-field appearance="fill">
+          <mat-label>Material Name</mat-label>
+          <input matInput placeholder="Enter material name" formControlName="materialname" required>
+          <mat-error *ngIf="updatemateralform.controls['materialname'].hasError('required')">Material name is required</mat-error>
+          <mat-error *ngIf="updatemateralform.controls['materialname'].hasError('minlength')">Name should be greater than 2</mat-error>
+        </mat-form-field>
+      </div>
+  
+      <div class="custom-form-container">
+        <mat-form-field appearance="fill">
+          <mat-label>Material Path</mat-label>
+          <input matInput placeholder="Enter material path" formControlName="materialpath">
+          <mat-error *ngIf="updatemateralform.controls['materialpath'].hasError('required')">Material path is required</mat-error>
+        </mat-form-field>
+      </div>
+  
+      <!--<div class="custom-form-container">
+        <mat-form-field appearance="fill">
+          <mat-label>Select Course</mat-label>
+          <select matNativeControl required formControlName="courseid">
+            <option *ngFor="let course of _instructorService.courses" [value]="course.courseid">{{ course.coursename }}</option>
+          </select>
+          <mat-error *ngIf="updatemateralform.controls['courseid'].hasError('required')">Course is required</mat-error>
+        </mat-form-field>
+      </div>-->
+  
+      <div class="custom-form-container">
+        <mat-form-field appearance="fill">
+          <mat-label>Video URL</mat-label>
+          <input matInput placeholder="Enter video URL" formControlName="videourl">
+          <mat-error *ngIf="updatemateralform.controls['videourl'].hasError('required')">Video URL is required</mat-error>
+        </mat-form-field>
+      </div>
+  
+      <div class="custom-form-actions">
+        <button mat-raised-button color="primary" mat-dialog-close (click)="updateMaterial()">
+          <i class="dw dw-edit2"></i> Update
+        </button>
+      </div>
+    </form>
+  </ng-template> 
+  
+  <ng-template #createdialog>
+    <form [formGroup]="createmateralform" class="custom-dialog-form">
+      <div class="custom-form-container">
+        <mat-form-field appearance="fill">
+          <mat-label>Material Name</mat-label>
+          <input matInput placeholder="Enter material name" formControlName="materialname" required>
+          <mat-error *ngIf="createmateralform.controls['materialname'].hasError('required')">Material name is required</mat-error>
+          <mat-error *ngIf="createmateralform.controls['materialname'].hasError('minlength')">Name should be greater than 2</mat-error>
+        </mat-form-field>
+      </div>
+     <!-- <div class="custom-form-container">
+        <mat-form-field appearance="fill">
+          <mat-label>Select Course</mat-label>
+          <mat-select formControlName="courseid" required>
+            <mat-option *ngFor="let course of _instructorService.courses" [value]="course.courseid">{{ course.coursename }}</mat-option>
+          </mat-select>
+          <mat-error *ngIf="createmateralform.controls['courseid'].hasError('required')">Course is required</mat-error>
+        </mat-form-field>
+      </div>-->
+      <div class="custom-form-container">
+        <mat-form-field appearance="fill">
+          <mat-label>Video URL</mat-label>
+          <input matInput placeholder="Enter video URL" formControlName="videourl">
+          <mat-error *ngIf="createmateralform.controls['videourl'].hasError('required')">Video URL is required</mat-error>
+        </mat-form-field>
+      </div>
+      <div class="custom-form-container">
+        <label for="fileInput">Upload File</label>
+        <input type="file" id="fileInput" (change)="UploadImage($event)">
+      </div>
+      <div class="custom-form-actions">
+        <button mat-raised-button color="primary" mat-dialog-close (click)="CreateMaterial()">Create</button>
+      </div>
+    </form>
+  </ng-template> 
+  
+
+
+          
+          <ng-template #confirmdelet>
+            <h1 mat-dialog-title>Delete Matrial</h1>
+            <div mat-dialog-content>
+              Would you like to delete matiral?
+            </div>
+            <div mat-dialog-actions>
+              <button mat-button mat-dialog-close = "no"  cdkFocusInitial>No</button>
+              <button mat-button mat-dialog-close = "yes" >Ok</button>
+            </div>
+          </ng-template>
+
+       
+  
+  
+    <!-- <button mat-button (click)="openDialog()">Launch dialog</button> -->

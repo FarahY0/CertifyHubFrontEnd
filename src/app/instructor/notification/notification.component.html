@@ -1,0 +1,215 @@
+<app-instructor-header></app-instructor-header>
+<app-instructor-sidebar></app-instructor-sidebar>
+
+<div class="main-container">
+    <div class="pd-ltr-20 xs-pd-20-10">
+        <div class="min-height-200px">
+            <div class="page-header">
+                <div class="row">
+                    <div class="col-md-6 col-sm-12">
+                        <div class="title">
+                            <h4>Notification</h4>
+                        </div>
+                        <nav aria-label="breadcrumb" role="navigation">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                                <li class="breadcrumb-item active" style="color: #1565C0;">Notification</li>
+                            </ol>
+                        </nav>
+                    </div>
+                   
+                </div>
+            </div>
+            <!-- Simple Datatable start -->
+            <div class="card-box mb-30">
+                <div class="pd-20">
+                    <button (click)="OpenCreateDialog()" mat-raised-button style="background-color: #1565C0; color: antiquewhite;" >Create</button>
+                </div>
+                <div class="pb-20">
+                    <table class="data-table table stripe hover nowrap">
+                        <thead>
+                            <tr>
+                                <th class="table-plus datatable-nosort">Notification</th>
+                                <!-- <th>Section</th> -->
+                                <th>Start Date</th>
+                                <th>End Date</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let n of _instructorService.notificationDate">
+                                <td class="table-plus">{{n.notificationtext}}</td>
+                                <!-- <td>{{n.section.sectionname}}</td> -->
+                                <td>{{n.notificationstartdate | date: 'yyyy-MM-dd' }}</td>
+                                <td>{{n.notificationenddate | date: 'yyyy-MM-dd' }}</td>
+                                <td>
+                                    <div class="dropdown">
+                                        <a class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle" href="#" role="button" data-toggle="dropdown">
+                                            <i class="dw dw-more" style="color: #1565C0;"></i>
+                                        </a>
+                                        <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
+                                            
+                                            <button class="dropdown-item" (click)=OpenUpdateDialog(n)><i class="dw dw-edit2"></i> Edit</button>
+                                            <button class="dropdown-item" (click)=OpenConfirmationDialog(n.notificationid,n.sectionId) ><i class="dw dw-delete-3"></i> Delete</button>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        
+                        </tbody>
+                    </table>
+
+                    
+                </div>
+                
+            </div>
+            <!-- Simple Datatable End -->
+         
+            <!-- Default Basic Forms Start -->
+          
+      
+            
+            <!-- Default Basic Forms End -->
+        </div>
+        <div class="footer-wrap pd-20 mb-20 card-box">
+            DeskApp - Bootstrap 4 Admin Template By <a href="https://github.com/dropways" target="_blank">Ankit Hingarajiya</a>
+        </div>
+    </div>
+</div>
+<!-- Create Form -->
+
+<ng-template #CreateDialog  >
+   
+    
+    <form [formGroup]="CreateNotificationForm" style="background-color: #1565C0; color: antiquewhite ;
+    text-align:center;
+  
+  background-size: cover;
+  background-position: center;
+
+  height: 81.3vh;
+  margin: none;
+    " > 
+        <mat-form-field style="width: 90%;">
+        <div class="example-container">
+        
+         <mat-label class="col-form-label" >Notification Text</mat-label>
+        <div class="placeholder">
+            <input class="form-control" type="text" placeholder="Write Your Notification" formControlName="notificationtext">
+            <mat-error *ngIf="CreateNotificationForm.controls['notificationtext'].hasError('required')">Notification Text is required</mat-error>
+            <mat-error *ngIf="CreateNotificationForm.controls['notificationtext'].hasError('minlength')">Text should be great than 2</mat-error>
+       
+        </div>
+        
+     </div>
+    </mat-form-field>
+ 
+    <mat-form-field style="width: 90%;">
+     <div class="example-container">
+        
+         <mat-label for="example-datetime-local-input" class="col-form-label">Start Date</mat-label>
+         <div >
+             <input class="form-control datetimepicker" placeholder="Choose Date anf time" type="date" formControlName="notificationstartdate">
+             <mat-error *ngIf="CreateNotificationForm.controls['notificationstartdate'].hasError('required')">date  is required</mat-error>
+        </div>
+       
+     </div>
+    </mat-form-field>
+    <mat-form-field style="width: 90%;" >
+     <div class="example-container">
+     
+         <mat-label for="example-datetime-local-input" class="col-form-label">End Date</mat-label>
+         <div >
+             <input class="form-control datetimepicker" placeholder="Choose Date anf time" type="date" formControlName="notificationenddate">
+             <mat-error *ngIf="CreateNotificationForm.controls['notificationenddate'].hasError('required')">date  is required</mat-error>
+         </div>
+    
+     </div>
+    </mat-form-field>
+
+
+   
+     <button mat-dialog-close (click)="CreateNotification(sectionId)" type="submit"  mat-raised-button style="background-color: aliceblue !important; color:  #202342;"   class=".button-container">Create</button>
+  
+  
+
+ </form>
+
+
+
+  </ng-template>
+
+<!-- Delete Dialog -->
+
+<ng-template #ConfirmationDialog >
+
+    <h1 mat-dialog-title style="color:#1E88E5;" >Delete Notification</h1>
+    <div mat-dialog-content  >
+      Would you like to delete the Notification?
+    </div>
+    <div mat-dialog-actions  class="justify-content-center">
+      <button mat-button mat-dialog-close="no" cdkFocusInitial >No</button>
+      <button mat-button mat-dialog-close="yes" style="background-color: #1E88E5;color: white;">Yes</button>
+    </div>
+
+
+    
+ </ng-template>
+ <!-- Update Dialog -->
+
+ <ng-template #UpdateDialog>
+    <div >
+    <form [formGroup]="UpdateNotificationForm" style="background-color: #1E88E5; color: antiquewhite ;
+    text-align:center;
+  
+  background-size: cover;
+  background-position: center;
+
+  height: 81.3vh;
+  margin: none;
+    "> 
+      <mat-form-field style="width: 90%;">
+     <div class="example-container">
+       
+         <mat-label class="col-form-label">Notification Text</mat-label>
+        <div class="placeholder">
+            <input class="form-control" type="text" placeholder="Write Your Notification" formControlName="notificationtext">
+            <mat-error *ngIf="UpdateNotificationForm.controls['notificationtext'].hasError('required')">Notification Text is required</mat-error>
+            <mat-error *ngIf="UpdateNotificationForm.controls['notificationtext'].hasError('minlength')">Text should be great than 2</mat-error>
+       
+        </div>
+         
+         
+      
+     </div>
+    </mat-form-field>
+ 
+    <mat-form-field style="width: 90%;">
+     <div class="example-container">
+         
+         <mat-label for="example-datetime-local-input" class="col-form-label">Start Date</mat-label>
+         <div >
+             <input class="form-control datetimepicker" placeholder="Choose Date anf time" type="date" formControlName="notificationstartdate">
+             <mat-error *ngIf="UpdateNotificationForm.controls['notificationstartdate'].hasError('required')">date  is required</mat-error>
+        </div>
+        
+     </div>
+    </mat-form-field>
+    <mat-form-field style="width: 90%;">
+     <div class="example-container">
+    
+         <mat-label for="example-datetime-local-input" class="col-form-label">End Date</mat-label>
+         <div >
+             <input class="form-control datetimepicker" placeholder="Choose Date anf time" type="date" formControlName="notificationenddate">
+             <mat-error *ngIf="UpdateNotificationForm.controls['notificationenddate'].hasError('required')">date  is required</mat-error>
+         </div>
+     
+     </div>
+    </mat-form-field>
+
+ <div>
+     <button mat-dialog-close (click)="UpdateNotification(sectionId)" type="submit"  mat-raised-button class="example-label" style="background-color: aliceblue !important; color:  #202342;"  class=".button-container">Update</button>
+ </div>
+ </form>
+</div>
+  </ng-template>

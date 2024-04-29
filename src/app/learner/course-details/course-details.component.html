@@ -1,0 +1,66 @@
+
+<app-student-header></app-student-header>
+<app-student-sidebar></app-student-sidebar>
+<div class="main-container">
+	<div class="pd-ltr-20 xs-pd-20-10">
+		<div class="min-height-200px">
+			<div class="page-header">
+				<div class="row">
+					<div class="col-md-12 col-sm-12">
+						<div class="title">
+							<h4>Cards Hover</h4>
+						</div>
+						<nav aria-label="breadcrumb" role="navigation">
+							<ol class="breadcrumb">
+								<li class="breadcrumb-item"><a href="index.html">Home</a></li>
+								<li class="breadcrumb-item active" aria-current="page">My Courses</li>
+							</ol>
+						</nav>
+					</div>
+				</div>
+			</div>
+			<!-- Fade-in effect -->
+			
+			<div class="row clearfix">
+				
+            <div *ngFor="let c of _learnerService.courseDetails">
+              <h2>{{ c.coursename }}</h2>
+              <p><strong>Start Date:</strong> {{ c.startdate }}</p>
+              <p><strong>End Date:</strong> {{ c.enddate }}</p>
+              <img [src]="c.imagepath" alt="Course Image" width="200" height="150">
+              <p><strong>Number of Sections:</strong> {{ c.numberofsections }}</p>
+            
+              <!-- Displaying section details -->
+             
+                <h3>{{ c.sectionname }}</h3>
+                <p><strong>Time Lecture:</strong> {{ c.timelecture }}</p>
+                <p><strong>Meeting Link:</strong> {{ c.meetinglink }}</p>
+                <p><strong>Lecture Days:</strong> {{ c.lecturedays }}</p>
+             
+            
+              <!-- Displaying instructor name -->
+              <p><strong>Instructor Name:</strong> {{ c.firstname }}</p>
+            
+              <!-- Displaying material details -->
+              <div >
+                <h3>{{ c.materialname }}</h3>
+                <p><strong>Material Path:</strong> {{ c.materialpath }}</p>
+              </div>
+            
+              <!-- Displaying other details like student grade, number of batches, program details -->
+              <p><strong>Student Grade:</strong> {{ c.studentgrade }}</p>
+              <p><strong>Number of Batches:</strong> {{ c.numberofbatches }}</p>
+              <p><strong>Track Name:</strong> {{ c.trackname }}</p>
+              <p><strong>Program Period:</strong> {{ c.programperiod }}</p>
+            </div>
+            
+					</div>
+       
+		
+
+		
+
+		</div>
+	
+	</div>
+</div>
